@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,11 +32,23 @@ Route::get('/test100',function(){
 
 Route::controller(DepartmentController::class)->group(function () {
     Route::prefix('admin')->group(function(){
-        Route::name('admin.departments')->group(function(){
+        Route::name('admin.departments.')->group(function(){
             Route::get("/departments",'index')->name('index');
             Route::get("/departments/create",'create')->name('create');
-            Route::get('departments/show/{id?}','show')->name('show')->whereNumber('id');
+            Route::get('departments/{id?}','show')->name('show')->whereNumber('id');
             Route::get('departments/{id}/edit','edit')->name('edit')->whereNumber('id');
+            Route::post('departments','store')->name('store');
+            Route::put('departments','update')->name('update');
+            Route::delete('departments/{id}','destroy')->name('destroy');
+        });
+
+        Route::get('/home',[HomeController::class,'index']);
+        Route::name('admin.')->group(function(){
+            Route::resources([
+                'employees' => EmployeeController::class
+            ]);
         });
     });
 });
+
+
