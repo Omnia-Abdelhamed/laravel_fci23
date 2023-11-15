@@ -20,7 +20,13 @@
 <form class="form-horizontal" action="{{ route('admin.departments.update') }}" enctype="multipart/form-data" method="post">
     @method('PUT')
     @csrf
+    <input type="hidden" name="old_dept_id" value="{{ $data->dept_id }}">
     <div class="card-body">
+        @if (Session::has('msg'))
+        <div class="alert alert-success">
+            {{ Session::get('msg') }}
+        </div>
+        @endif
       <div class="form-group row">
         <label
           for="dno"
@@ -34,6 +40,7 @@
             id="dno"
             placeholder="Dno Here"
             name="dno"
+            value="{{ $data['dept_id'] }}"
           />
         </div>
       </div>
@@ -50,10 +57,28 @@
             id="dname"
             placeholder="Dname Here"
             name="dname"
+            value="{{ $data['dept_name'] }}"
           />
         </div>
       </div>
       <div class="form-group row">
+        <label
+          for="dname"
+          class="col-sm-3 text-end control-label col-form-label"
+          >Desc</label
+        >
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            id="dname"
+            placeholder="Dname Here"
+            name="desc"
+            value="{{ $data['desc'] }}"
+          />
+        </div>
+      </div>
+      {{-- <div class="form-group row">
         <label
           for="dname"
           class="col-sm-3 text-end control-label col-form-label"
@@ -68,7 +93,7 @@
             name="image"
           />
         </div>
-      </div>
+      </div> --}}
       <div class="form-group row">
         <label
           for="fname"
@@ -77,7 +102,11 @@
         >
         <div class="col-sm-9">
           <select class="form-control" name="manager">
-            <option value=""></option>
+            @foreach ($managers as $manager)
+            <option value="{{ $manager['SSN'] }}" @if ($manager['SSN'] == $data['MGRSSN'])
+            selected
+            @endif>{{$manager['name']}}</option>
+            @endforeach
           </select>
         </div>
       </div>

@@ -23,20 +23,24 @@
           <tbody>
               <tr>
                   <th scope="row">Dno</th>
-                  <td></td>
+                  <td>{{ $data['dept_id'] }}</td>
               </tr>
               <tr>
                   <th scope="row">Dname</th>
-                  <td></td>
+                  <td>{{ $data['dept_name'] }}</td>
               </tr>
               <tr>
                   <th scope="row">Manager</th>
-                  <td></td>
+                  <td>{{ $data['MGRSSN'] }}</td>
               </tr>
               <tr>
+                <th scope="row">Desc</th>
+                <td>{{ $data['desc'] }}</td>
+            </tr>
+              {{-- <tr>
                   <th scope="row">Image</th>
                   <td><img class="img-fluid" width="100" src=""></td>
-              </tr>
+              </tr> --}}
           </tbody>
       </table>
     </div>

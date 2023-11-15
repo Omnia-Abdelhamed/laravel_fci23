@@ -19,8 +19,13 @@
 @endsection
 @section('content')
 <form class="form-horizontal" action="{{ route('admin.departments.store') }}" enctype="multipart/form-data" method="post">
-    @csrf
+    @csrf {{-- 419 error --}}
     <div class="card-body">
+        @if (Session::has('msg'))
+        <div class="alert alert-success">
+            {{ Session::get('msg') }}
+        </div>
+        @endif
       <div class="form-group row">
         <label
           for="dno"
@@ -57,6 +62,22 @@
         <label
           for="dname"
           class="col-sm-3 text-end control-label col-form-label"
+          >Desc</label
+        >
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            id="desc"
+            placeholder="Desc Here"
+            name="desc"
+          />
+        </div>
+      </div>
+      {{-- <div class="form-group row">
+        <label
+          for="dname"
+          class="col-sm-3 text-end control-label col-form-label"
           >Image</label
         >
         <div class="col-sm-9">
@@ -68,7 +89,7 @@
             name="image"
           />
         </div>
-      </div>
+      </div> --}}
       <div class="form-group row">
         <label
           for="fname"
@@ -77,9 +98,9 @@
         >
         <div class="col-sm-9">
           <select class="form-control" name="manager">
-            <option value="2233">2233</option>
-            <option value="2244">2244</option>
-            <option value="2255">2255</option>
+            @foreach ($managers as $manager)
+            <option value="{{ $manager['SSN'] }}">{{ $manager['name'] }}</option>
+            @endforeach
           </select>
         </div>
       </div>

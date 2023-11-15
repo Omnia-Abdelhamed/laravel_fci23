@@ -53,9 +53,7 @@ rel="stylesheet"
                 <td>{{ $department['desc'] }}</td>
                 <td>{{ $department['MGRSSN'] }}</td>
                 <td>
-                    <a href="{{ route('admin.departments.show',$department['dept_id']) }}" class="btn btn-primary">show</a>
-                    <a href="{{ route('admin.departments.edit',$department['dept_id']) }}" class="btn btn-success">edit</a>
-                    <form action="{{ route('admin.departments.destroy',$department['dept_id']) }}" method="post" style="display: inline-block">
+                    <form action="{{ route('admin.departments.destroyArchive',$department['dept_id']) }}" method="post" style="display: inline-block">
                         @method('DELETE')
                         @csrf
                         <input type="submit" value="delete" class="btn btn-danger">
@@ -76,4 +74,5 @@ rel="stylesheet"
   $("#zero_config").DataTable();
 </script>
 @endsection
+
 

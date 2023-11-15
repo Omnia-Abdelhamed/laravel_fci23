@@ -35,11 +35,13 @@ Route::controller(DepartmentController::class)->group(function () {
         Route::name('admin.departments.')->group(function(){
             Route::get("/departments",'index')->name('index');
             Route::get("/departments/create",'create')->name('create');
+            Route::get('/departments/archive','archive')->name('archive');
             Route::get('departments/{id?}','show')->name('show')->whereNumber('id');
             Route::get('departments/{id}/edit','edit')->name('edit')->whereNumber('id');
             Route::post('departments','store')->name('store');
             Route::put('departments','update')->name('update');
             Route::delete('departments/{id}','destroy')->name('destroy');
+            Route::delete('departments/archive/{id}','destroyArchive')->name('destroyArchive');
         });
 
         Route::get('/home',[HomeController::class,'index']);
