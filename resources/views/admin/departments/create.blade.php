@@ -26,6 +26,16 @@
             {{ Session::get('msg') }}
         </div>
         @endif
+
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
       <div class="form-group row">
         <label
           for="dno"
@@ -35,11 +45,15 @@
         <div class="col-sm-9">
           <input
             type="text"
-            class="form-control"
+            class="form-control @error('dno') is-invalid @enderror"
             id="dno"
             placeholder="Dno Here"
             name="dno"
+            value="{{ old('dno') }}"
           />
+          @error('dno')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         </div>
       </div>
       <div class="form-group row">
@@ -55,6 +69,7 @@
             id="dname"
             placeholder="Dname Here"
             name="dname"
+            value="{{ old('dname') }}"
           />
         </div>
       </div>
@@ -71,12 +86,13 @@
             id="desc"
             placeholder="Desc Here"
             name="desc"
+            value="{{ old('desc') }}"
           />
         </div>
       </div>
-      {{-- <div class="form-group row">
+      <div class="form-group row">
         <label
-          for="dname"
+          for="image"
           class="col-sm-3 text-end control-label col-form-label"
           >Image</label
         >
@@ -89,7 +105,7 @@
             name="image"
           />
         </div>
-      </div> --}}
+      </div>
       <div class="form-group row">
         <label
           for="fname"

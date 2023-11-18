@@ -4,6 +4,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,5 +53,9 @@ Route::controller(DepartmentController::class)->group(function () {
         });
     });
 });
+
+// Route::get('/upload',function(){
+//     Storage::disk('upload')->put('test.txt','welcome');
+// });
 
 

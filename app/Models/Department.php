@@ -12,5 +12,5 @@ class Department extends Model
     use SoftDeletes;
     // protected $table='departments';
     protected $primaryKey = 'dept_id';
-    protected $fillable=['dept_id','dept_name','desc','MGRSSN'];
+    protected $fillable=['dept_id','dept_name','desc','MGRSSN','deptImage'];
 }

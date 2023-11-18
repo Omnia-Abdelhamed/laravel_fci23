@@ -37,10 +37,10 @@
                 <th scope="row">Desc</th>
                 <td>{{ $data['desc'] }}</td>
             </tr>
-              {{-- <tr>
-                  <th scope="row">Image</th>
-                  <td><img class="img-fluid" width="100" src=""></td>
-              </tr> --}}
+            <tr>
+                <th scope="row">Image</th>
+                <td><img class="img-fluid" width="100" src="{{ URL::asset('upload/'.$data['deptImage']) }}"></td>
+            </tr>
           </tbody>
       </table>
     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DepartmentRequest;
 use App\Models\Department;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -18,18 +19,30 @@ class DepartmentController extends Controller
         return view('admin.departments.create',['managers'=>$managers]);
     }
 
-    public function store(Request $request){
+    public function store(DepartmentRequest $request){
+        // $imageName=$request->file('image')->getClientOriginalName();
+        $ext=$request->file('image')->getClientOriginalExtension();
+        $imageName=$request->dno.".".$ext;
+        $path=$request->file('image')->storeAs('images/departments',$imageName,'upload');
         // $department= new Department();
         // $department->dept_id=$request->dno;
         // $department->dept_name=$request->dname;
         // $department->desc=$request->desc;
         // $department->MGRSSN=$request->manager;
         // $department->save(); // insert
+
+        // $request->validate([
+        //     'dno'=>'required|unique:departments,dept_id|integer',
+        //     'dname'=>'required|unique:departments,dept_name|alpha_num|max:100',
+        //     'desc'=>'nullable',
+        //     'manager'=>'integer|nullable'
+        // ]);
         Department::create([
             'dept_id'=>$request->dno,
             'dept_name'=>$request->dname,
             'desc'=>$request->desc,
-            'MGRSSN'=>$request->manager
+            'MGRSSN'=>$request->manager,
+            'deptImage'=>$path
         ]);
         return redirect()->back()->with('msg','Addded Successfully..');
     }
@@ -41,6 +54,8 @@ class DepartmentController extends Controller
         // $department->desc=$request->desc;
         // $department->MGRSSN=$request->manager;
         // $department->save();
+
+        //
         $department->update([
             'dept_id'=>$request->dno,
             'dept_name'=>$request->dname,
